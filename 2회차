@@ -1,0 +1,23 @@
+import 라이브러리명
+selenium
+
+#from 라이브러리명 import 함수명
+from selenium import webdriver #selenium 라이브러리에서 webdriver
+
+selenium --> 브라우저 조작
+selenium --> (브라우저 열기 / 사이트 접속하기 / 클릭하기 /입력하기 삭제하기)
+
+"화면에 xxxx 부분 복사 -->가져와줘.. " -->BeautifulSoup("HTML 안에서 .....부분 찾아줘")
+
+browser = webdriver.Chrome('C:/informs/chromedriver.exe')
+
+#접속하기 get(url) -> 그냥 data창에 www.naver.com 입력해도되긴됌
+url = 'https://naver.com'
+browser.get(url)
+
+#끄기 -> 자동화시킬 때는 필요함
+browser.close()
+
+url = "https://search.daum.net/search?w=news&nil_search=btn&DA=NTB&enc=utf8&cluster=y&cluster_page=1&q=부동산"
+browser.get(url)
+#크롤링할 때 반복적으로 입력할 수 있음
