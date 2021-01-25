@@ -21,3 +21,89 @@ browser.close()
 url = "https://search.daum.net/search?w=news&nil_search=btn&DA=NTB&enc=utf8&cluster=y&cluster_page=1&q=부동산"
 browser.get(url)
 #크롤링할 때 반복적으로 입력할 수 있음
+
+#HTML 특징
+
+#---- 2교시 
+
+<태그명> </태그명> #시작 ~ 끝을 알 수 있음.
+
+<태그명 속성=값> </태그명> #속성이 들어갈 수 있음.
+<태그명 속성=값 속성=값 속성=값> </태그명> #속성이 여러개 들어갈 수 있음.
+
+<태그1> 
+    <태그2> </태그2>
+    <태그3>
+        <태그4></태그4>
+    </태그3>
+</태그1>
+
+</태그>
+
+<태그>장남수</태그> #--> 화면에는 "장남수"
+
+<p>
+    <span class = 'name'>장남수</span> 
+    # 태그명이 span인거 찾아줘...
+    # 태그명이 span & class속성값이 name인거 찾아줘
+    # 태그명이 span & class 속성값이 name인거.. 그러면서 부모 태그가 p인거
+<p>
+
+
+from bs4 import BeautifulSoup #B S 대문자
+
+#예시) 러닝스푼즈 데이터분석입문 강의 
+html = '''
+<h1> HTML예시  </h1>
+    <span> 파이썬 입문부터 시작하는 데이터 분석 마스터</span>
+    <p id="weeks1" class="seminar" title="first"> 1주차
+        <span class = "title"> 파이썬 맛보기 </span>
+        <span class = "presenter"> 장남수 </span>
+        <span class = "date"> 1월1일 </span>
+        <span class = "point"> 파이썬 설치 사전 안내 </span>
+        <a href = "https://kiddwannabe.blog.me/221154599192">네이버 블로그-아나콘다설치</a>
+    </p>
+    <p id="weeks2" class="seminar" title="second"> 2주차
+        <span class = "title"> 크롤링 해보기 </span>
+        <span class = "presenter"> 장남수 </span>
+        <span class = "date"> 1월2일 </span>
+        <span class = "point"> selenium / html </span>
+        <a href = "https://kiddwannabe.blog.me/221177292446">네이버 블로그-크롤링</a>
+    </p>
+    <p id="weeks3" class="seminar" title="third"> 3주차
+        <span class = "title"> 크롤링 실습 </span>
+        <span class = "presenter"> 장남수 </span>
+        <span class = "date"> 1월3일 </span>
+        <span class = "point"> 노래순위, 베스트셀러 </span>
+        <a href = "https://kiddwannabe.blog.me/">네이버 블로그</a>
+    </p>
+    <p id="weeks4" class="seminar" title="fourth"> 4주차
+        <span class = "title"> 판다스 살펴보기 </span>
+        <span class = "presenter"> 장남수 </span>
+        <span class = "date"> 1월4일 </span>
+        <span class = "point"> pandas </span>
+        <a href = "https://kiddwannabe.blog.me/">네이버 블로그</a>
+    </p>
+    <p id="weeks5" class="seminar" title="fifth"> 5주차
+        <span class = "title"> 상가 업력 분석하기 </span>
+        <span class = "presenter"> 장남수 </span>
+        <span class = "date"> 1월5일 </span>
+        <span class = "point"> 공공데이터 분석 </span>
+        <a href = "https://kiddwannabe.blog.me/">네이버 블로그</a>
+    </p>            
+    <p id="weeks6" class="seminar" title="sixth"> 6주차
+        <span class = "title"> 데이터 시각화 </span>
+        <span class = "presenter"> 장남수 </span>
+        <span class = "date"> 1월6일 </span>
+        <span class = "point"> seaborn </span>
+        <a href = "https://kiddwannabe.blog.me/221728411362">네이버 블로그-seaborn</a>
+    </p>  
+    <p id="weeks7" class="seminar" title="seventh"> 7주차
+        <span class = "title"> 네이버 쇼핑몰 수집/분석 </span>
+        <span class = "presenter"> 장남수 </span>
+        <span class = "date"> 1월7일 </span>
+        <span class = "point"> youtube </span>
+        <a href = "https://kiddwannabe.blog.me/">네이버 블로그</a>
+    </p> 
+</h1>
+'''
