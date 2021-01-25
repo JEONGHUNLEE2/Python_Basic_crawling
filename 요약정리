@@ -1,3 +1,5 @@
+로컬 c -> user -> jeonghun 작업 경로
+
 1주차
 ------------------------------------------------------------------------------------
 셀 추가(a, b): 셀 선택 후 esc 를 눌러서 커맨드 모드
@@ -105,7 +107,6 @@ shop_A = ['사과','배','파인애플']
   else:
       print("shop_A 에서 포도를 판매한다")
 
-
 A = '태극기'
 B = '태극기가 바람에 펄럭입니다'
   if A == B:
@@ -114,4 +115,61 @@ B = '태극기가 바람에 펄럭입니다'
       print("A가 B에 포함된다")
   else:
       print("다르다")
+------------------------------------------------------------------------------------
+문자열 포매팅/정리하기 : 문자열에서 고정된 값이 아닌, 변수(변하는 값)을 표시하게 할 수도 있습니다. 이를 포매팅이라고 합니다. 
+  name = '홍길동'
+  sentence = f'안녕하세요. {name}님 만나서 반갑습니다.'
+  print(name)
+  print(sentence)
+
+문자열에서,  줄바꿈문자는 \n으로,  탭 문자는 \t 로 표현합니다
+  raw = '\n\t 태극기가 바람에 펄럭입니다. \n 하늘 높이 하늘 높이 펄럭입니다. '
+  print(raw)
+  
+문자열.strip() 명령을 통해,  문자열 시작과 끝 부분의 공백문자(줄바꿈/띄어쓰기/탭문자 등)을 제거할 수 있습니다. 
+  raw_strip = raw.strip()
+  print(raw_strip)
+  
+문자열.replace( ) 명령을 통해 특정 문자열을 없애거나 변경할 수 있습니다. 
+  raw_edit = raw_strip.replace('하늘 높이', '하늘높이')
+  print(raw_edit)
+
+split()을 이용해 특정 문자열을 기준으로 문자열을 나눌 수 있습니다. 
+split() 결과는 리스트 타입입니다. 
+  data = "미국/중국/일본/러시아/베트남/태국"
+  data.split('/')
+------------------------------------------------------------------------------------  
+함수 만들기
+def 함수이름(변수1, 변수2, ...변수n):  
+    함수 실행내용  
+    return 실행결과  
+    
+  def gob(a, b):
+      gob = a*b
+      text = '{} x {} = {}'.format(a, b, gob)
+      return text
+
+  a = 2
+  b = 8
+
+  text = gob(a,b)
+  print(text)
+------------------------------------------------------------------------------------  
+2주차
+
+Selenium 시작하기
+Chrome 드라이버 설치하기
+  크롬드라이버 최신버전 다운: https://sites.google.com/a/chromium.org/chromedriver/downloads
+  절대경로위치 지정하기 쉬운 폴더에 압축 풀기 ex) c:/informs
+
+webdriver 열기
+! pip install selenium
+
+selenium 불러오기
+from selenium import webdriver #selenium 라이브러리에서 webdriver 실행
+selenium --> 브라우저 조작
+selenium --> (브라우저 열기 / 사이트 접속하기 / 클릭하기 /입력하기 삭제하기)
+
+c:/informs/chromedriver.exe #파일 위치 
+browser = webdriver.Chrome('C:/informs/chromedriver.exe')
 
