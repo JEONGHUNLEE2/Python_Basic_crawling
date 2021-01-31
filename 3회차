@@ -28,13 +28,83 @@
 ----------------------------------------------------------------------------------------------------------------------
 from selenium import webdriver
 from bs4 import BeautifulSoup
+
+browser = webdriver.Chrome('c:/informs/chromedriver.exe')
+
+results = []
+
+url = "https://youtube-rank.com/board/bbs/board.php?bo_table=youtube&page=1"
+browser.get(url)
+
+html = browser.page_source
+soup = BeautifulSoup(html,'html.parser') 
+channel_list = soup.select('form > table > tbody > tr') 
+
+for channel in channel_list :
+    
+    title = channel.select('h1 > a')[0].text.strip()
+    category = channel.select('p.category')[0].text.strip()
+    subscriber = channel.select('td.subscriber_cnt')[0].text.strip()
+    view = channel.select('td.view_cnt')[0].text.strip()
+    video = channel.select('td.video_cnt')[0].text.strip()
+    
+    data = [title, category,subscriber, view, video]
+    #print(data)
+    results.append(data)
+    
+import pandas as pd
+df = pd.DataFrame(results) 
+df
+
+df.columns = ['채널명','카테고리','구독자수','조회수','영상수']
+df
+
+df.to_excel('./1페이지크롤링2.xlsx', index = False)
+#문자에서 숫자로 바꾸는거 찾아보기 
+
+--------------------------------------------------------------완전 정리
+from selenium import webdriver
+from bs4 import BeautifulSoup
 import pandas as pd
 import time #쉬게 해주는 함수
 import random #랜덤하게 숫자 뱉는거
 
 browser = webdriver.Chrome('c:/informs/chromedriver.exe')
 
-random.uniform(2,5)
+results = []
 
+page = 6
+#page_list = [1,2,3,4,5...]
+#[0:11]은 옆에 집합이 있어야함. ex) [01,13,3,3,3,4,,5,,,6,6,6][0:5] 이런식으로 
 page_list = range(1,11)
 
+for page in page_list:
+    
+#url = "https://youtube-rank.com/board/bbs/board.php?bo_table=youtube&page=3"
+    url = f"https://youtube-rank.com/board/bbs/board.php?bo_table=youtube&page={page}"
+    browser.get(url)
+    #몇 초 기다려줘.....(접속~page_source 받기  사이에.....)
+    time.sleep(2) #이렇게 하면 서버에서 차단될 수도 있음
+    
+    html = browser.page_source
+    soup = BeautifulSoup(html,'html.parser') 
+    channel_list = soup.select('form > table > tbody > tr') 
+
+    for channel in channel_list :
+
+        title = channel.select('h1 > a')[0].text.strip()
+        category = channel.select('p.category')[0].text.strip()
+        subscriber = channel.select('td.subscriber_cnt')[0].text.strip()
+        view = channel.select('td.view_cnt')[0].text.strip()
+        video = channel.select('td.video_cnt')[0].text.strip()
+
+        data = [title, category,subscriber, view, video]
+        #print(data)
+        results.append(data)
+        
+#엑셀저장하기
+df = pd.DataFrame(results) 
+df.columns = ['채널명','카테고리','구독자수','조회수','영상수']
+#filename = f'./유튜브채널랭크_Top{len(results)}.xlsx'
+filename = f'유튜브채널랭크_Top{len(results)}.xlsx'
+df.to_excel(filename, index = False)
