@@ -26,3 +26,8 @@
     - .to_excel('파일명.xlsx')
     
 ----------------------------------------------------------------------------------------------------------------------
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import pandas as pd
+import time #쉬게 해주는 함수
+import random #랜덤하게 숫자 뱉는거
