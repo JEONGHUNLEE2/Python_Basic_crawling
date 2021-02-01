@@ -280,7 +280,7 @@ presenter = week.select('span.presenter')[0].text
 date = week.select('span.date')[0].text 
 point = week.select('span.point')[0].text
 print(title, presenter, date, point)
-
+------------------------------------------------------------------------------------
 반복문으로 데이터 쌓기 
 results = [] #데이터를 넣을 공간을 생성
 for week in week_list:
@@ -295,7 +295,7 @@ for week in week_list:
     data = [title, presenter, date, point, link] #데이터 내보내기!
     print(data)
     results.append(data) #results에 입력, 쌓아주는거 
-    
+------------------------------------------------------------------------------------    
 내보내기 
 import pandas as pd
 df = pd.DataFrame(results) # 표형태 데이터 #D F 대문자
